@@ -40,13 +40,7 @@ O projeto está organizado da seguinte forma:
     └── Raphael.jpeg
 
 ---
-## 4. Imagens do Projeto
-
-
-
----
-
-## 5. Link do Repositório GitHub
+## 4. Link do Repositório GitHub
 
 O link permanente para este repositório é:
 
