@@ -20,7 +20,7 @@ Este é o repositório do projeto "Conexão TdB", desenvolvido para o Challenge 
 *JavaScript** (Interatividade, validação de formulários e manipulação do DOM)
 
 ---
-3. Estrutura de Pastas
+## 3. Estrutura de Pastas
 O projeto está organizado da seguinte forma:
 /
 ├── index.html          (Página Home)
@@ -42,6 +42,3 @@ O projeto está organizado da seguinte forma:
 ---
 ## 4. Link do Repositório GitHub
 
-O link permanente para este repositório é:
-
-[COLE A URL DO SEU REPOSITÓRIO AQUI]
