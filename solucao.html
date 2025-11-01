@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Solução - Conexão TdB</title>
+    <link rel="stylesheet" href="Estilo.css/estilo.css">
+    
+    <style>
+        .features-list, .problems-list, .diff-list {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+        .features-list li, .problems-list li, .diff-list li {
+            margin-bottom: 10px;
+        }
+        .sprint-details {
+            margin-top: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #eee;
+        }
+        .sprint-details summary {
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><span>td</span><span>b</span> Conexão</a>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre o Projeto</a></li>
+                    <li><a href="integrantes.html">Integrantes</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="solucao.html">A Solução</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger-menu" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="section-title">Proposta de Solução: "Conexão TdB"</h1>
+            <div class="content-box">
+                <h2>O Problema</h2>
+                <p>
+                    A Turma do Bem (TdB) gerencia a maior rede de voluntariado especializado do mundo
+                    Com o crescimento (85 mil jovens atendidos e 18,5 mil dentistas em 2024), 
+                    a gestão da comunicação, que é descentralizada por e-mail e WhatsApp, tornou-se um desafio.
+                </p>
+                <p>Essa falta de centralização resulta em:</p>
+                <ul class="problems-list">
+                    <li>Dificuldade em rastrear o status de cada solicitação.</li>
+                    <li>Risco de perda de informações importantes em múltiplos canais.</li>
+                    <li>Demora no encaminhamento de mensagens para as áreas responsáveis.</li>
+                    <li>Incapacidade de gerar dados consolidados para apoiar a tomada de decisão.</li>
+                </ul>
+
+                <h2>A Proposta: Um CRM Social</h2>
+                <p>
+                    A plataforma "Conexão TdB" é um CRM Social desenvolvido sob medida. 
+                    A solução centralizará todos os pontos de contato em um único sistema web, 
+                    intuitivo e eficiente, permitindo uma visão 360 graus de cada relacionamento.
+                </p>
+                <h3>Funcionalidades Principais:</h3>
+                <ul class="features-list">
+                    <li>
+                        <strong>Central de Atendimento Unificada:</strong> Integração de canais (e-mail, WhatsApp, formulário) 
+                        em uma única caixa de entrada, onde cada interação vira um ticket rastreável.
+                    </li>
+                    <li>
+                        <strong>Triagem e Direcionamento Automático:</strong> O sistema classificará e 
+                        atribuirá automaticamente as solicitações às equipes responsáveis.
+                    </li>
+                    <li>
+                        <strong>Portal dos Stakeholders:</strong> Áreas exclusivas para Dentistas (visualizar casos), 
+                        Beneficiários (acompanhar status)  e Doadores (acessar relatórios).
+                    </li>
+                    <li>
+                        <strong>Gestão do Ciclo de Vida:</strong> Acompanhamento completo do status de cada 
+                        solicitação (aberto, em andamento, concluído).
+                    </li>
+                    <li>
+                        <strong>Dashboard Gerencial:</strong> Painel com relatórios e indicadores em tempo real 
+                        (ex: tempo médio de resposta) .
+                    </li>
+                </ul>
+
+                <h2>Diferenciais da Solução</h2>
+                <ul class="diff-list">
+                    <li>
+                        <strong>Solução Especializada:</strong> Desenhada para o fluxo de trabalho de uma OSCIP, 
+                        entendendo a relação com voluntários e beneficiários.
+                    </li>
+                    <li>
+                        <strong>Escalabilidade:</strong> A arquitetura permitirá o crescimento futuro da TdB 
+                        sem perda de performance.
+                    </li>
+                    <li>
+                        <strong>Empoderamento dos Públicos:</strong> Os portais de autoatendimento reduzem a carga 
+                        sobre a equipe interna e oferecem autonomia e transparência.
+                    </li>
+                </ul>
+
+                <h2>Roadmap do Projeto</h2>
+                <p>O desenvolvimento da plataforma "Conexão TdB" está planejado em 4 Sprints:</p>
+
+                <details class="sprint-details">
+                    <summary>Sprint 1: Estruturação e Design</summary>
+                    <p><strong>Objetivo:</strong> Estruturação e design da solução.</p>
+                    <p><strong>Entregáveis:</strong> Documento Funcional, Pitch, Backlog, Modelagem de Classes e BD, Design de Interface.</p>
+                </details>
+
+                <details class="sprint-details">
+                    <summary>Sprint 2: Núcleo do Sistema</summary>
+                    <p><strong>Objetivo:</strong> Desenvolvimento do núcleo do sistema (autenticação e portal do administrador).</p>
+                    <p><strong>Entregáveis:</strong> BMC, Mapa de Empatia, protótipo navegável responsivo, implementação das classes em Java e funcionalidades em Python.</p>
+                </details>
+
+                <details class="sprint-details">
+                    <summary>Sprint 3: Portal do Dentista (Previsão 2026)</summary>
+                    <p><strong>Objetivo:</strong> Desenvolvimento do Portal do Dentista Voluntário.</p>
+                    <p><strong>Entregáveis:</strong> Funcionalidades de login, visualização e atualização de casos pelo dentista.</p>
+                </details>
+
+                <details class="sprint-details">
+                    <summary>Sprint 4: Portal do Beneficiário e Dashboard (Previsão 2026)</summary>
+                    <p><strong>Objetivo:</strong> Desenvolvimento do Portal do Beneficiário e Dashboard Gerencial.</p>
+                    <p><strong>Entregáveis:</strong> Cadastro e acompanhamento de status para beneficiários; painel com relatórios para gestores.</p>
+                </details>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 TechSmile Solutions - Projeto Challenge FIAP 1TDS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="script.js" defer></script>
+</body>
+</html>
