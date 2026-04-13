@@ -43,7 +43,7 @@ Nesta fase (Sprint 3), a solução foi totalmente migrada de HTML/CSS puro para 
  ├── /pages       # Telas principais (Home, Sobre, FAQ, Contato, Integrantes, Solução)
  ├── App.tsx      # Configuração central de rotas (Routes/Route)
  └── main.tsx     # Ponto de entrada e renderização do React
-
+```
  ---
 
 🛠️ Como Executar Localmente
