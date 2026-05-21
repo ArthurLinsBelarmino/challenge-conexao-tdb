@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 export const Header = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const fecharMenu = () => setMenuAberto(false);
@@ -25,7 +24,7 @@ export const Header = () => {
           <Link to="/sobre" className="text-lg font-semibold text-slate-400 hover:text-white transition-all hover:-translate-y-0.5">Sobre</Link>
           <Link to="/integrantes" className="text-lg font-semibold text-slate-400 hover:text-white transition-all hover:-translate-y-0.5">Equipe</Link>
           <Link to="/faq" className="text-lg font-semibold text-slate-400 hover:text-white transition-all hover:-translate-y-0.5">FAQ</Link>
-          <Link to="/dashboard" className="text-lg font-semibold text-slate-400 hover:text-white">Área do Dentista</Link>
+          <Link to="/dashboard" className="text-lg font-semibold text-purple-400 hover:text-purple-300 transition-colors">Área do Dentista</Link>
           
           <Link 
             to="/contato" 
@@ -38,6 +37,7 @@ export const Header = () => {
         <button 
           className="md:hidden text-white p-2"
           onClick={() => setMenuAberto(!menuAberto)}
+          aria-label="Menu"
         >
           {menuAberto ? (
             <svg className="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,9 +52,10 @@ export const Header = () => {
       </nav>
 
       {menuAberto && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-slate-950 border-b border-white/10 flex flex-col items-center py-6 gap-4 shadow-2xl max-h-[80vh] overflow-y-auto">
+        <div className="md:hidden absolute top-full left-0 w-full bg-slate-950 border-b border-white/10 flex flex-col items-center py-6 gap-6 shadow-2xl">
           <Link to="/" onClick={fecharMenu} className="text-lg font-semibold text-slate-300 hover:text-white">Home</Link>
           <Link to="/solucao" onClick={fecharMenu} className="text-lg font-semibold text-slate-300 hover:text-white">Solução</Link>
+          <Link to="/dashboard" onClick={fecharMenu} className="text-lg font-semibold text-purple-400 hover:text-white">Área do Dentista</Link>
           <Link to="/sobre" onClick={fecharMenu} className="text-lg font-semibold text-slate-300 hover:text-white">Sobre</Link>
           <Link to="/integrantes" onClick={fecharMenu} className="text-lg font-semibold text-slate-300 hover:text-white">Equipe</Link>
           <Link to="/faq" onClick={fecharMenu} className="text-lg font-semibold text-slate-300 hover:text-white">FAQ</Link>

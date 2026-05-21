@@ -25,26 +25,19 @@ Além disso, o sistema atua como uma **Single Page Application (SPA)**, proporci
 
 # 🚀 Tecnologias Utilizadas
 
-- **React 19 + Vite**  
-  Construção da SPA com alta performance de renderização e build otimizado.
+- **React 19 + Vite** Construção da SPA com alta performance de renderização e build otimizado.
 
-- **TypeScript**  
-  Tipagem estática avançada, garantindo segurança e previsibilidade nos dados consumidos da API.
+- **TypeScript** Tipagem estática avançada, garantindo segurança e previsibilidade nos dados consumidos da API.
 
-- **Tailwind CSS**  
-  Estilização utilitária para criação de layouts modernos, premium e 100% responsivos.
+- **Tailwind CSS** Estilização utilitária para criação de layouts modernos, premium e 100% responsivos.
 
-- **React Router DOM**  
-  Gerenciamento de rotas estáticas e dinâmicas (`/integrantes/:id`).
+- **React Router DOM** Gerenciamento de rotas estáticas e dinâmicas (`/integrantes/:id`).
 
-- **React Hook Form**  
-  Captura, gerenciamento de estados e validação eficiente de formulários.
+- **React Hook Form** Captura, gerenciamento de estados e validação eficiente de formulários.
 
-- **Fetch API**  
-  Comunicação HTTP assíncrona com o Back-End Java utilizando métodos GET e POST, além de tratamento de exceções com `try/catch`.
+- **Fetch API** Comunicação HTTP assíncrona com o Back-End Java utilizando métodos GET, POST, PUT e DELETE, além de tratamento de exceções com `try/catch`.
 
-- **Java + DDD**  
-  Arquitetura Back-End baseada em Domain-Driven Design.
+- **Java + DDD** Arquitetura Back-End baseada em Domain-Driven Design.
 
 ---
 
@@ -67,6 +60,36 @@ src
 │   ├── Solucao
 │   └── Dashboard
 ├── types/          # Interfaces e modelos TypeScript
-│   └── models.ts
+│   └── modelo.ts
 ├── App.tsx         # Configuração central de rotas
 └── main.tsx        # Ponto de entrada da aplicação
+
+---
+
+## 👥 Autores e Créditos
+
+Equipe de desenvolvimento e engenharia responsável pelo projeto (Análise e Desenvolvimento de Sistemas - FIAP):
+
+- **Arthur Lins Belarmino** | RM: 566845 | Turma: 2TDSPY | [LinkedIn](https://www.linkedin.com/in/arthur-lins-belarmino-3b1369328/) | [GitHub](https://github.com/ArthurLinsBelarmino)
+- **Henrique Spoltore M. P. dos Santos** | RM: 568130 | Turma: 2TDSPY | [LinkedIn](https://www.linkedin.com/in/henrique-pav%C3%A3o-849407251/) | [GitHub](https://github.com/henrique477)
+- **Raphael Oliveira S. M. de Mendonça** | RM: 568346 | Turma: 2TDSPY | [LinkedIn](https://www.linkedin.com/in/raphael-sinelli-675310321) | [GitHub](https://github.com/Raphael-Sinelli)
+
+---
+
+🔗 Links Importantes da Entrega
+Para fins de avaliação da banca examinadora, seguem os links oficiais da solução publicada e recursos de apresentação:
+
+URL do Deploy Front-End (Vercel): [INSERIR_LINK_DA_VERCEL_AQUI]
+
+Vídeo de Apresentação Técnica (YouTube): [INSERIR_LINK_DO_YOUTUBE_AQUI]
+
+Repositório do Projeto (GitHub): https://github.com/ArthurLinsBelarmino/techsmile-sprint4
+
+URL Base da API Back-End (Render): https://crm-social-sprint4-java.onrender.com
+
+---
+
+📬 Contato
+Caso necessite de suporte técnico, esclarecimentos sobre a arquitetura modular da SPA ou sobre os contratos de integração com os DTOs da API Java, entre em contato com os representantes da equipe:
+
+E-mail Institucional: rm566845@fiap.com.br (Arthur Lins)

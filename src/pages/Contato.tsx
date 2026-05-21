@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface ContatoForm {
@@ -8,8 +9,10 @@ interface ContatoForm {
 
 export default function Contato() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContatoForm>();
+  const [enviando, setEnviando] = useState(false);
 
   const onSubmit = async (data: ContatoForm) => {
+    setEnviando(true);
     try {
       const resposta = await fetch('http://localhost:8080/api/contatos', {
         method: 'POST',
@@ -23,13 +26,13 @@ export default function Contato() {
         throw new Error('Falha ao enviar a mensagem para o servidor Java.');
       }
 
-      console.log("Dados enviados para a API:", data);
       alert("Mensagem enviada com sucesso para a ONG Turma do Bem!");
       reset();
-
     } catch (erro) {
       console.error(erro);
       alert("Erro de conexão com o servidor. Por favor, tente novamente mais tarde.");
+    } finally {
+      setEnviando(false);
     }
   };
 
@@ -57,6 +60,7 @@ export default function Contato() {
           />
           {errors.nome && <span className="text-red-400 text-xs">Nome é obrigatório</span>}
         </div>
+
         <div className="space-y-2">
           <label className="text-sm font-medium text-slate-400">E-mail</label>
           <input 
@@ -67,6 +71,7 @@ export default function Contato() {
           />
           {errors.email && <span className="text-red-400 text-xs">E-mail é obrigatório</span>}
         </div>
+
         <div className="space-y-2">
           <label className="text-sm font-medium text-slate-400">Mensagem</label>
           <textarea 
@@ -77,8 +82,13 @@ export default function Contato() {
           ></textarea>
           {errors.mensagem && <span className="text-red-400 text-xs">Mensagem é obrigatória</span>}
         </div>
-        <button type="submit" className="w-full rounded-xl bg-purple-600 py-4 font-bold transition-all hover:bg-purple-500 shadow-lg shadow-purple-900/20 text-white">
-          Enviar Mensagem
+
+        <button 
+          type="submit" 
+          disabled={enviando} 
+          className="w-full rounded-xl bg-purple-600 py-4 font-bold transition-all hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-900/20 text-white"
+        >
+          {enviando ? "Enviando..." : "Enviar Mensagem"}
         </button>
       </form>
     </div>

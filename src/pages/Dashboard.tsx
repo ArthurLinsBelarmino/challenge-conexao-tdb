@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
 import type { Paciente } from '../types/modelo';
 
+const API_URL = 'https://crm-social-sprint4-java.onrender.com/beneficiarios';
+
 export default function Dashboard() {
   const [pacientes, setPacientes] = useState<Paciente[]>([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
+  const [processandoId, setProcessandoId] = useState<number | null>(null);
 
   useEffect(() => {
     const carregarPacientes = async () => {
       try {
-        const resposta = await fetch('http://localhost:8080/api/pacientes');
-        if (!resposta.ok) throw new Error('Falha ao buscar dados do servidor Java');
+        const resposta = await fetch(API_URL);
+        if (!resposta.ok) throw new Error('Falha ao buscar dados do servidor.');
         const dados = await resposta.json();
         setPacientes(dados);
       } catch (error) {
-        setErro('Erro de conexão com o Back-End. Tente novamente mais tarde.');
+        setErro('Erro de conexão com a API Java no Render. Verifique o servidor.');
         console.error(error);
       } finally {
         setLoading(false);
@@ -23,39 +26,58 @@ export default function Dashboard() {
     carregarPacientes();
   }, []);
 
-  const handleExcluir = async (id: number) => {
+  const handleExcluir = async (idBeneficiario: number) => {
+    if (!confirm("Tem certeza que deseja excluir este beneficiário?")) return;
+    
+    setProcessandoId(idBeneficiario);
     try {
-      const resposta = await fetch(`http://localhost:8080/api/pacientes/${id}`, {
+      const resposta = await fetch(`${API_URL}/${idBeneficiario}`, {
         method: 'DELETE',
       });
       
-      if (!resposta.ok) throw new Error('Falha ao excluir o paciente');
+      if (!resposta.ok) throw new Error('Falha ao excluir o beneficiário');
       
-      setPacientes(pacientes.filter(paciente => paciente.id !== id));
-      alert("Paciente excluído com sucesso!");
+      setPacientes(prev => prev.filter(p => p.idBeneficiario !== idBeneficiario));
+      alert("Beneficiário removido com sucesso!");
     } catch (error) {
       console.error(error);
-      alert("Erro ao tentar excluir. O servidor pode estar offline.");
+      alert("Erro ao tentar excluir. O servidor pode estar processando ou offline.");
+    } finally {
+      setProcessandoId(null);
     }
   };
 
-  const handleAprovar = async (id: number) => {
+  const handleAprovar = async (paciente: Paciente) => {
+    setProcessandoId(paciente.idBeneficiario);
     try {
-      const resposta = await fetch(`http://localhost:8080/api/pacientes/${id}/status`, {
+      const corpoRequisicao = {
+        nome: paciente.nome,
+        cpf: paciente.cpf || "999.999.999-99", 
+        dataNascimento: paciente.dataNascimento || "2000-01-01", 
+        telefone: paciente.telefone || "(11) 99999-9999",
+        email: paciente.email || "sem-email@teste.com",
+        cidade: paciente.cidade || "São Paulo",
+        uf: paciente.uf || "SP",
+        status: 'EM_ATENDIMENTO'
+      };
+
+      const resposta = await fetch(`${API_URL}/${paciente.idBeneficiario}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'Aprovado' })
+        body: JSON.stringify(corpoRequisicao)
       });
 
-      if (!resposta.ok) throw new Error('Falha ao aprovar o paciente');
+      if (!resposta.ok) throw new Error('Falha ao atualizar o status');
 
-      setPacientes(pacientes.map(paciente => 
-        paciente.id === id ? { ...paciente, status: 'Aprovado' } : paciente
+      setPacientes(prev => prev.map(p => 
+        p.idBeneficiario === paciente.idBeneficiario ? { ...p, status: 'EM_ATENDIMENTO' } : p
       ));
-      alert("Status atualizado para Aprovado!");
+      alert("Status atualizado para EM_ATENDIMENTO com sucesso!");
     } catch (error) {
       console.error(error);
-      alert("Erro ao tentar aprovar. O servidor pode estar offline.");
+      alert("Erro ao tentar atualizar status no servidor Java.");
+    } finally {
+      setProcessandoId(null);
     }
   };
 
@@ -65,10 +87,10 @@ export default function Dashboard() {
         Dashboard de <span className="text-purple-500">Triagem</span>
       </h1>
 
-      {loading && <p className="text-slate-400">Carregando dados do servidor...</p>}
+      {loading && <p className="text-slate-400 animate-pulse">Consultando API Java no Render...</p>}
       
       {erro && (
-        <div className="p-4 mb-6 rounded-xl bg-red-500/20 border border-red-500/50 text-red-400">
+        <div className="p-4 mb-6 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400">
           {erro}
         </div>
       )}
@@ -76,31 +98,33 @@ export default function Dashboard() {
       {!loading && !erro && (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {pacientes.length === 0 ? (
-            <p className="text-slate-400">Nenhum paciente na fila de triagem.</p>
+            <p className="text-slate-400">Nenhum beneficiário na fila de triagem.</p>
           ) : (
             pacientes.map((paciente) => (
-              <div key={paciente.id} className="glass p-6 rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all flex flex-col">
+              <div key={paciente.idBeneficiario} className="glass p-6 rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all flex flex-col">
                 <div className="mb-auto">
                   <h3 className="text-xl font-bold text-white mb-2">{paciente.nome}</h3>
-                  <p className="text-slate-400 mb-4">Idade: {paciente.idade} anos</p>
-                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${paciente.status === 'Pendente' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}`}>
+                  <p className="text-slate-400 text-sm mb-1">Cidade: {paciente.cidade} - {paciente.uf}</p>
+                  <p className="text-slate-400 text-sm mb-4">Contato: {paciente.email}</p>
+                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${paciente.status === 'ATIVO' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}`}>
                     {paciente.status}
                   </span>
                 </div>
                 
                 <div className="mt-6 flex gap-2 border-t border-white/10 pt-4">
                   <button 
-                    onClick={() => handleAprovar(paciente.id)}
-                    disabled={paciente.status === 'Aprovado'}
-                    className="flex-1 bg-green-600/20 text-green-400 hover:bg-green-600/40 disabled:opacity-50 py-2 rounded-lg text-sm font-bold transition-colors"
+                    onClick={() => handleAprovar(paciente)}
+                    disabled={paciente.status === 'EM_ATENDIMENTO' || processandoId === paciente.idBeneficiario}
+                    className="flex-1 bg-green-600/20 text-green-400 hover:bg-green-600/40 disabled:opacity-30 py-2 rounded-lg text-sm font-bold transition-all"
                   >
-                    Aprovar
+                    {processandoId === paciente.idBeneficiario ? "..." : "Aprovar"}
                   </button>
                   <button 
-                    onClick={() => handleExcluir(paciente.id)}
-                    className="flex-1 bg-red-600/20 text-red-400 hover:bg-red-600/40 py-2 rounded-lg text-sm font-bold transition-colors"
+                    onClick={() => handleExcluir(paciente.idBeneficiario)}
+                    disabled={processandoId === paciente.idBeneficiario}
+                    className="flex-1 bg-red-600/20 text-red-400 hover:bg-red-600/40 disabled:opacity-30 py-2 rounded-lg text-sm font-bold transition-all"
                   >
-                    Excluir
+                    {processandoId === paciente.idBeneficiario ? "..." : "Excluir"}
                   </button>
                 </div>
               </div>
